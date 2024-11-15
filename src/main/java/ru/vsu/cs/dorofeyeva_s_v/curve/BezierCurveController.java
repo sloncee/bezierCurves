@@ -34,7 +34,6 @@ public class BezierCurveController {
 
     private void handleMouseClicked(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY && selectedPointIndex == -1) {
-            // если рядом нет существующей точки, добавляем новую
             int nearbyIndex = findNearbyPointIndex(event.getX(), event.getY());
             if (nearbyIndex == -1) {
                 Point2D clickPoint = new Point2D(event.getX(), event.getY());
@@ -46,16 +45,14 @@ public class BezierCurveController {
 
     private void handleMousePressed(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY) {
-            // находим индекс ближайшей к нажатию точки
             selectedPointIndex = findNearbyPointIndex(event.getX(), event.getY());
         }
     }
 
     private void handleMouseDragged(MouseEvent event) {
         if (selectedPointIndex != -1) {
-            // обновляем координаты только выбранной точки
             Point2D newPoint = new Point2D(event.getX(), event.getY());
-            points.set(selectedPointIndex, newPoint);  // перезаписываем только выбранную точку
+            points.set(selectedPointIndex, newPoint);
             redrawCanvas();
         }
     }
